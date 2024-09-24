@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <title>Dailies</title>
+  </head>
+  <body>
+    <h1>Dailies</h1>
+    
+    <h2>Planned:</h2>
+    <ul>
+      {% for daily in plannedTasks %}
+        <li>{{ daily.dataValues.tasks }}</li>
+         <form action="/complete/{{daily.dataValues.id_daily}}">
+          <input id ="itemId" type="hidden" name="itemId" value="{{daily.dataValues.id_daily}}">
+          <button type="submit">complete</button>
+         </form>
+         <form action="/delete/{{daily.dataValues.id_daily}}">
+          <input id ="itemId" type="hidden" name="itemId" value="{{daily.dataValues.id_daily}}">
+          <button type="submit">delete</button>
+         </form>
+      {% endfor %}
+    </ul>
+    
+    <h2>Completed:</h2>
+    <ul>
+      {% for daily in completedTasks %}
+        <li>{{ daily.dataValues.tasks }}</li>
+        <form action="/delete/{{daily.dataValues.id_daily}}">
+        <input id ="itemId" type="hidden" name="itemId" value="{{daily.dataValues.id_daily}}">
+          <button type="submit">delete</button>
+         </form>
+      {% endfor %}
+    </ul>
+    
+    <form action="/add" method="post">
+      <input type="text" name="tasks" placeholder="New task">
+      <button type="submit">Add task</button>
+    </form>
+    <form  action="/logout">
+    <button type="submit">Logout</button>
+  </form>
+  </body>
+</html>
